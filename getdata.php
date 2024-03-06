@@ -14,6 +14,7 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $data[] = $row;
     }
+    $json_data = json_encode($data);
 } else {
     echo "No data found";
 }
@@ -37,6 +38,34 @@ if ($result->num_rows > 0) {
             <h2 class="text-white text-center">Clipboard Data</h2>
         </div>
         <hr>
+        <div class="raw">
+            <div class="col d-flex justify-content-end">
+                <input type="text" class="mb-2 pb-1 border1" oninput="search()" id="search" placeholder="Search by name">
+            </div>
+        </div>  
+
+        <div class="container">
+            <div class="row">
+                <div class="col d-flex justify-content-end">
+                <div class="table-responsive d-none" id="tbl">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Show Code</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody" >
+                   
+                </tbody>
+            </table>
+        </div>
+                </div>
+            </div>
+
+        </div>
+
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -67,6 +96,46 @@ if ($result->num_rows > 0) {
             </div>
         </div>
     </div>
+    
 </body>
+<script>
 
+const opn = ()=>{
+    document.getElementById('tbl').classList.remove('d-none');
+}
+
+
+
+        function search() {
+
+        
+            var value = document.getElementById('search').value;
+if(value.length>=!0){
+    opn();
+    opntbl();
+}
+else{
+    document.getElementById('tbl').classList.add('d-none');
+}
+
+            var clipboardData = <?php echo $json_data; ?>;
+            var filteredData = clipboardData.filter(function (item) {
+                return item.Name.toLowerCase().includes(value.toLowerCase());
+            })
+            
+          <div id="chl">
+        //   {
+        //     filteredData.map((item)=>{
+        //         return(
+        //             <td>{item.Id}</td>
+        //         )
+        //     })
+        //   }
+          <h1>helooooooooo</h1>
+          </div>
+   
+        }
+    }
+    
+</script>
 </html>
